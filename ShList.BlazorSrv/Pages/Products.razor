@@ -1,0 +1,33 @@
+﻿@page "/products"
+
+@inject HttpClient Http
+
+<h1>Products</h1>
+
+<p>List of products</p>
+
+@if (_productDtos == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var productDto in _productDtos)
+            {
+            <tr>
+                <td>@productDto.Name</td>
+                <td>@productDto.Notes</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+
