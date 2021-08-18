@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using ShList.Dto;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
@@ -19,8 +20,12 @@ namespace ShList.BlazorSrv.Services
 
         public async Task<IEnumerable<ProductDto>> Get()
         {
-            return await _httpClient.GetFromJsonAsync<IEnumerable<ProductDto>>("api/Products");
+            return await _httpClient.GetFromJsonAsync<IEnumerable<ProductDto>>("/api/Products");
         }
 
+        public async Task<ProductDto> Get(string productId)
+        {
+            return await _httpClient.GetFromJsonAsync<ProductDto>($"/api/Products/{productId}");
+        }
     }
 }

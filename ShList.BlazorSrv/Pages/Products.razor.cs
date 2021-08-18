@@ -18,8 +18,8 @@ namespace ShList.BlazorSrv.Pages
         protected override async Task OnInitializedAsync()
         {
             _productDtos = await _productService.Get();
-            
 
+            await base.OnInitializedAsync();
         }
     }
 }

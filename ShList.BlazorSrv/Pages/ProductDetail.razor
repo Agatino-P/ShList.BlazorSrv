@@ -1,0 +1,21 @@
+﻿@page "/productdetail/{ProductId}"
+
+<h3>Product Detail</h3>
+
+
+@if (_product == null)
+{
+    <p>Loading....</p>
+}
+else
+{
+    <p>Name: @_product.Name</p>
+    <p>Notes: @_product.Notes</p>
+}
+
+
+<!--
+
+<p>Name: @_product.Name</p>
+<p>Notes: @_product.Notes</p>
+-->
