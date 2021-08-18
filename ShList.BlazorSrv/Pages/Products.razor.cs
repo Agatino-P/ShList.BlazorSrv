@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using ShList.BlazorSrv.Models;
 using ShList.BlazorSrv.Services;
 using ShList.Dto;
 using System.Collections.Generic;
@@ -10,14 +11,14 @@ namespace ShList.BlazorSrv.Pages
 {
     public partial class Products
     {
-        private IEnumerable<ProductDto> _productDtos = new List<ProductDto>();
+        private IEnumerable<Product> _products = new List<Product>();
 
         [Inject]
         private ProductService _productService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            _productDtos = await _productService.Get();
+            _products = await _productService.Get();
 
             await base.OnInitializedAsync();
         }

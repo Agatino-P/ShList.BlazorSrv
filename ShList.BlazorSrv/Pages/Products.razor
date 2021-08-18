@@ -4,7 +4,7 @@
 
 <p>List of products</p>
 
-@if (_productDtos == null)
+@if (_products == null)
 {
     <p><em>Loading...</em></p>
 }
@@ -18,11 +18,16 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var productDto in _productDtos)
+            @foreach (var product in _products)
             {
             <tr>
-                <td>@productDto.Name</td>
-                <td>@productDto.Notes</td>
+                <td>@product.Name</td>
+                <td>@product.Notes</td>
+                <td>
+                    <a href="@($"productdetail/{product.Id}")" class="btn btn-primary table-btn">
+                        Detail    
+                    </a>
+                </td>
             </tr>
             }
         </tbody>
