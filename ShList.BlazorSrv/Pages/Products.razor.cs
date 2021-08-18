@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using ShList.BlazorSrv.Services;
 using ShList.Dto;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -12,11 +13,13 @@ namespace ShList.BlazorSrv.Pages
         private IEnumerable<ProductDto> _productDtos = new List<ProductDto>();
 
         [Inject]
-        private HttpClient _httpClient { get; set; }
+        private ProductService _productService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            _productDtos = await _httpClient.GetFromJsonAsync<IEnumerable<ProductDto>>("api/Products");
+            _productDtos = await _productService.Get();
+            
+
         }
     }
 }

@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ShList.BlazorSrv.Data;
-using System.Net.Http;
+using ShList.BlazorSrv.Services;
 using System;
+using System.Net.Http;
 
 namespace ShList.BlazorSrv
 {
@@ -24,8 +24,8 @@ namespace ShList.BlazorSrv
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
             services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:44368/") });
+            services.AddScoped<ProductService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
