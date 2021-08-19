@@ -41,22 +41,18 @@
                        @bind-Value="@_product.Notes"
                        placeholder="Enter product notes...">
             </InputText>
-            <button type="submit" class="btn btn-primary">
-                <i class="fas fa-save"></i>
-            </button>
+            <button type="submit" class="btn btn-primary fas fa-save"/>
 
-            <button type="reset" class="btn btn-primary">
-                @if (Mode == ModeEnum.Edit)
-                {
-                    <i class="fas fa-window-close"></i>
-                }
-                else
-                {
-                    <i class="fas fa-trash-alt"></i>
-                }
-            </button>
+            <button type="reset" class="btn btn-primary fas fa-undo"/>
+            
+            @if (Mode == ModeEnum.Edit)
+            {
+                <button class="btn btn-primary fas fa-trash-alt"/>
+            }
 
+            <button class="btn btn-primary fas fa-window-close"/>
         </EditForm>
+
     </section>
     @if(!string.IsNullOrEmpty(Message))
     {
