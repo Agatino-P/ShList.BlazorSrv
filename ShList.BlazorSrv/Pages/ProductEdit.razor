@@ -44,6 +44,18 @@
             <button type="submit" class="btn btn-primary">
                 <i class="fas fa-save"></i>
             </button>
+
+            <button type="reset" class="btn btn-primary">
+                @if (Mode == ModeEnum.Edit)
+                {
+                    <i class="fas fa-window-close"></i>
+                }
+                else
+                {
+                    <i class="fas fa-trash-alt"></i>
+                }
+            </button>
+
         </EditForm>
     </section>
     @if(!string.IsNullOrEmpty(Message))

@@ -1,21 +1,29 @@
 ﻿@page "/"
 @page "/products"
 
-<h1>Products</h1>
 
-<p>List of products</p>
+
 
 @if (_products == null)
 {
+    <h1>Products</h1>
     <p><em>Loading...</em></p>
 }
 else
 {
+    <div>
+        <h1 class="col-sm-8">Products</h1>
+        <button class="col-sm-2">Add</button>
+        <button class="col-sm-2">Refresh</button>
+    </div>
+
     <table class="table">
         <thead>
             <tr>
                 <th>Name</th>
                 <th>Notes</th>
+                <th>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -31,6 +39,10 @@ else
                         <a href="@($"productedit/{product.Id}")" class="btn btn-primary table-btn">
                             <i class="fas fa-edit"></i>
                         </a>
+                        <button>
+                            <i class="fas fa-trash"></i>
+                        </button>
+
                     </td>
                 </tr>
             }

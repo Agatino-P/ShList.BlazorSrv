@@ -22,22 +22,25 @@ namespace ShList.BlazorSrv.Pages
         protected string StatusClass { get; set; } = "alert-success";
         protected bool Saved { get; set; } = true;
 
+        protected enum ModeEnum { Edit, Add} 
+        protected ModeEnum Mode { get; set; }
 
-        private Product _product { get; set; }
+    private Product _product { get; set; }
 
         //public string Name { get; set; }
         //public string Notes { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            
             if (string.IsNullOrEmpty(ProductId))
             {
+                Mode = ModeEnum.Add;
                 _product = new Product();
                 Saved = true;
             }
             else
             {
+                Mode = ModeEnum.Edit;
                 _product = await _productService.Get(ProductId);
                 Saved = false;
             }
