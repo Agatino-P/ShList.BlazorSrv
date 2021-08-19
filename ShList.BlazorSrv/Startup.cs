@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ShList.BlazorSrv.Services;
+using ShList.BlazorSrv.Services.Interfaces;
+using ShList.BlazorSrv.Services.Models;
 using System;
 using System.Net.Http;
 
@@ -22,10 +23,16 @@ namespace ShList.BlazorSrv
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddTransient<IProductService,ProductService>(); //This HAS TO BE BEFORE AddHttpClient
+            services.AddHttpClient<IProductService,ProductService>(client => //This HAS TO BE AFTER AddTransient of services using it
+                {
+                    client.BaseAddress = new Uri(Configuration["ApiBaseAddress"]);
+                });
+
+
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:44368/") });
-            services.AddScoped<ProductService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

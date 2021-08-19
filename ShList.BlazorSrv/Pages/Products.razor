@@ -1,4 +1,5 @@
-﻿@page "/products"
+﻿@page "/"
+@page "/products"
 
 <h1>Products</h1>
 
@@ -20,15 +21,18 @@ else
         <tbody>
             @foreach (var product in _products)
             {
-            <tr>
-                <td>@product.Name</td>
-                <td>@product.Notes</td>
-                <td>
-                    <a href="@($"productdetail/{product.Id}")" class="btn btn-primary table-btn">
-                        Detail    
-                    </a>
-                </td>
-            </tr>
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.Notes</td>
+                    <td>
+                        <a href="@($"productdetail/{product.Id}")" class="btn btn-primary table-btn">
+                            <i class="fas fa-info"></i>
+                        </a>
+                        <a href="@($"productedit/{product.Id}")" class="btn btn-primary table-btn">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

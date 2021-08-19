@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using ShList.BlazorSrv.Models;
-using ShList.BlazorSrv.Services;
-using ShList.Dto;
+using ShList.BlazorSrv.Services.Interfaces;
+using ShList.BlazorSrv.Services.Models;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace ShList.BlazorSrv.Pages
@@ -14,7 +12,7 @@ namespace ShList.BlazorSrv.Pages
         private IEnumerable<Product> _products = new List<Product>();
 
         [Inject]
-        private ProductService _productService { get; set; }
+        private IProductService _productService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {

@@ -1,0 +1,33 @@
+﻿@page "/productedit"
+@page "/productedit/{ProductId}"
+
+
+@if (_product != null)
+{
+
+    <section class="product-edit">
+        <h1 class="page-title"> Details for @(_product.Name?? "New Product")</h1>
+        <EditForm Model="@_product">
+            <label for="itName" class="col-sm-3">Name:</label>
+            <InputText id="itName" class="form-control col-sm-8"
+                       @bind-Value="@_product.Name"
+                       placeholder="Enter product name...">
+            </InputText>
+
+            <label for="itNotes" class="col-sm-3">Name:</label>
+
+            <InputText id="itNotes" class="form-control col-sm-8"
+                       @bind-Value="@_product.Notes"
+                       placeholder="Enter product notes...">
+            </InputText>
+        </EditForm>
+    </section>
+
+    <a href="/products">
+        <i class="fas fa-backward"></i>
+        <span aria-hidden="true"></span> Products
+    </a>
+
+}
+
+

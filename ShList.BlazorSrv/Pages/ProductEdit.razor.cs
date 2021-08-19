@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShList.BlazorSrv.Pages
 {
-    public partial class ProductDetail
+    public partial class ProductEdit
     {
         [Parameter]
         public string ProductId { get; set; }
@@ -22,10 +22,18 @@ namespace ShList.BlazorSrv.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            _product = await _productService.Get(ProductId);
             
+            if (!string.IsNullOrEmpty(ProductId))
+            {
+                _product = await _productService.Get(ProductId);
+            }
+            else
+            {
+                _product = new Product();
+            }
 
-            Debug.WriteLine($"product got:{_product.Name}");
+
+
             await base.OnInitializedAsync();
         }
     }

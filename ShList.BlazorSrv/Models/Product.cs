@@ -9,12 +9,14 @@ namespace ShList.BlazorSrv.Models
     public class Product
     {
         public Guid Id { get; private set; }
-        public string Name { get; private set; }
-        public string Notes { get; private set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
+        public string Notes { get;set; } = string.Empty;
 
-        //for EF
-        private Product()
+        public Product()
         {
+            Id = Guid.NewGuid();
+            Name = string.Empty;
+            Notes = string.Empty;
         }
 
         public Product(string name, string notes) : base()
