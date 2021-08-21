@@ -15,4 +15,8 @@
     <ProjectReference Include="..\..\ShList.Dto.Sol\ShList.Dto\ShList.Dto.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Components\" />
+  </ItemGroup>
+
 </Project>

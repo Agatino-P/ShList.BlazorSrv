@@ -1,54 +1,68 @@
 ﻿@page "/"
 @page "/products"
 
+<style scoped>
+    .iconbutton {
+        width: 48px !important;
+    }
+</style>
 
+    @if (_products == null)
+    {
+        <h1>Products</h1>
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
 
+        <div class="container">
+            <h1>
+                <span>Products</span>
+                <button style="" class="btn btn-primary table-btn fas fa-sync  iconbutton" />
+            </h1>
+        </div>
+        <div class="container">
 
-@if (_products == null)
-{
-    <h1>Products</h1>
-    <p><em>Loading...</em></p>
-}
-else
-{
-<div>
-    <h1 class="col-sm-8">Products</h1>
-    <a href="@($"productedit")" class="btn btn-primary table-btn">
-        <i class="fas fa-plus-square"></i>
-    </a>
-    <button class="col-sm-2">Refresh</button>
-</div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Notes</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in _products)
+                    {
+                        <tr>
+                            <td>@product.Name</td>
+                            <td>@product.Notes</td>
+                            <td>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Notes</th>
-                <th>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var product in _products)
-            {
-                <tr>
-                    <td>@product.Name</td>
-                    <td>@product.Notes</td>
-                    <td>
-                        <a href="@($"productdetail/{product.Id}")" class="btn btn-primary table-btn">
-                            <i class="fas fa-info"></i>
-                        </a>
-                        <a href="@($"productedit/{product.Id}")" class="btn btn-primary table-btn">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <button>
-                            <i class="fas fa-trash"></i>
-                        </button>
+                                <a href="@($"productdetail/{product.Id}")" class="btn btn-primary table-btn   iconbutton">
+                                    <i class="fas fa-info" />
+                                </a>
+                                <a href="@($"productedit/{product.Id}")" class="btn btn-primary table-btn  iconbutton">
+                                    <i class="fas fa-edit" />
+                                </a>
+                                <button class="btn btn-primary table-btn  iconbutton"
+                                        @onclick="@(_ => DeleteProduct(@product.Id))">
+                                    <i class="fas fa-trash" />
+                                </button>
 
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+                            </td>
+                        </tr>
+                    }
+                    <tr>
+                        <td />
+                        <td />
+                        <td>
+                            <a href="@($"productedit")" class="btn btn-primary table-btn fas fa-plus-square  iconbutton" />
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    }
 

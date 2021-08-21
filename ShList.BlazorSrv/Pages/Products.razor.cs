@@ -2,6 +2,7 @@
 using ShList.BlazorSrv.Models;
 using ShList.BlazorSrv.Services.Interfaces;
 using ShList.BlazorSrv.Services.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -19,6 +20,11 @@ namespace ShList.BlazorSrv.Pages
             _products = await _productService.Get();
 
             await base.OnInitializedAsync();
+        }
+
+        protected void DeleteProduct(Guid id)
+        {
+            //show dialog, if confirmed, delete
         }
     }
 }

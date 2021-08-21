@@ -13,7 +13,7 @@ namespace ShList.BlazorSrv.Pages
         [Inject]
         private IProductService _productService { get; set; }
 
-    [Inject]
+        [Inject]
         private NavigationManager _navigationManager { get; set; }
 
         //For UI
@@ -46,7 +46,7 @@ namespace ShList.BlazorSrv.Pages
             await base.OnInitializedAsync();
         }
 
-        protected void         NavigateToProducts()
+        protected void NavigateToProducts()
         {
             _navigationManager.NavigateTo("/products");
         }
