@@ -10,5 +10,6 @@ namespace ShList.BlazorSrv.Services.Interfaces
         Task<IEnumerable<Product>> Get();
         Task<Product> Get(string productId);
         Task<Product> AddOrUpdate(Product product);
+        Task<bool> Delete(Product product);
     }
 }

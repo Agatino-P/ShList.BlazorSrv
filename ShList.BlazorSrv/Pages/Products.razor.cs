@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
+using ShList.BlazorSrv.Components;
 using ShList.BlazorSrv.Models;
 using ShList.BlazorSrv.Services.Interfaces;
-using ShList.BlazorSrv.Services.Models;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -15,16 +14,39 @@ namespace ShList.BlazorSrv.Pages
         [Inject]
         private IProductService _productService { get; set; }
 
+        protected ConfirmProductDelete ConfirmProductDeleteDialog { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
-            _products = await _productService.Get();
-
+            await getAllProducts();
             await base.OnInitializedAsync();
         }
 
-        protected void DeleteProduct(Guid id)
+        protected async Task RefreshCmd()
         {
-            //show dialog, if confirmed, delete
+            await getAllProducts();
+            StateHasChanged();
         }
+
+        private async Task getAllProducts()
+        {
+            _products = await _productService.Get();
+        }
+
+        protected void ShowDeleteProductCmd(Product product)
+        {
+            ConfirmProductDeleteDialog.Product = product;
+            ConfirmProductDeleteDialog.Show(product);
+        }
+
+        public async void ProductDeleteCallBack(Product product)
+        {
+            if (product != null)
+            {
+                bool deleted = await _productService.Delete(product);
+                await RefreshCmd();
+            }
+        }
+
     }
 }

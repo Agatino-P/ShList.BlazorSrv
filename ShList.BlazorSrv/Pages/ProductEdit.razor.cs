@@ -58,11 +58,12 @@ namespace ShList.BlazorSrv.Pages
             Message = "Saved!";
         }
 
-        protected async Task HandleInvalidSubmit()
+        protected Task HandleInvalidSubmit()
         {
             StatusClass = "alert-danger";
             Message = "Invalid Data";
             //_product = await _productService.AddOrUpdate(_product);
+            return Task.CompletedTask;
         }
 
 

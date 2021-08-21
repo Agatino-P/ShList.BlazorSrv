@@ -40,5 +40,16 @@ namespace ShList.BlazorSrv.Services.Models
             await _httpClient.PostAsJsonAsync<ProductDto>($"/api/Products",dto);
             return product; //Quick and dirty because I know product is not changed, but the right way is to deserialize the outcome of a successful post
         }
+
+        public async Task<bool> Delete(Product product)
+        {
+            ProductDto dto = new ProductDto(product.Id, product.Name, product.Notes);
+            //TODO Check the result and act accordingly.
+            HttpResponseMessage outcome = await _httpClient.DeleteAsync($"/api/Products/{product.Id}");
+            return outcome.IsSuccessStatusCode==true; //Quick and dirty because I know product is not changed, but the right way is to deserialize the outcome of a successful post
+        }
+
+
+
     }
 }
