@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using ShList.BlazorSrv.Models;
 using ShList.BlazorSrv.Services.Interfaces;
-using ShList.Dto;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace ShList.BlazorSrv.Pages
@@ -15,17 +13,18 @@ namespace ShList.BlazorSrv.Pages
         [Inject]
         private IProductService _productService { get; set; }
 
-
+    [Inject]
+        private NavigationManager _navigationManager { get; set; }
 
         //For UI
         protected string Message { get; set; }
         protected string StatusClass { get; set; } = "alert-success";
         protected bool Saved { get; set; } = true;
 
-        protected enum ModeEnum { Edit, Add} 
+        protected enum ModeEnum { Edit, Add }
         protected ModeEnum Mode { get; set; }
 
-    private Product _product { get; set; }
+        private Product _product { get; set; }
 
         //public string Name { get; set; }
         //public string Notes { get; set; }
@@ -47,6 +46,11 @@ namespace ShList.BlazorSrv.Pages
             await base.OnInitializedAsync();
         }
 
+        protected void         NavigateToProducts()
+        {
+            _navigationManager.NavigateTo("/products");
+        }
+
         protected async Task HandleValidSubmit()
         {
             _product = await _productService.AddOrUpdate(_product);
@@ -58,8 +62,10 @@ namespace ShList.BlazorSrv.Pages
         {
             StatusClass = "alert-danger";
             Message = "Invalid Data";
-        //_product = await _productService.AddOrUpdate(_product);
-    }
+            //_product = await _productService.AddOrUpdate(_product);
+        }
+
+
 
     }
 }

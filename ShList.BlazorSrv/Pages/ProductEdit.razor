@@ -11,6 +11,7 @@
             margin: 20px;
             padding: 20px;
         }
+
         .alert-danger {
             background-color: tomato;
             color: black;
@@ -18,7 +19,6 @@
             margin: 20px;
             padding: 20px;
         }
-
     </style>
 </head>
 
@@ -29,11 +29,15 @@
         <h1 class="page-title"> Details for @(_product.Name?? "New Product")</h1>
         <EditForm Model="@_product"
                   OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
+            <DataAnnotationsValidator/>
+            <ValidationSummary/>
             <label for="itName" class="col-sm-3">Name:</label>
-            <InputText id="itName" class="form-control col-sm-8"
-                       @bind-Value="@_product.Name"
-                       placeholder="Enter product name...">
-            </InputText>
+            <div>
+                <InputText id="itName" class="form-control col-sm-8"
+                           @bind-Value="@_product.Name"
+                           placeholder="Enter product name..." />
+                <ValidationMessage class="offset-3 col-sm-8" For="@(()=>_product.Name)"/>
+            </div>
 
             <label for="itNotes" class="col-sm-3">Name:</label>
 
@@ -41,30 +45,28 @@
                        @bind-Value="@_product.Notes"
                        placeholder="Enter product notes...">
             </InputText>
-            <button type="submit" class="btn btn-primary fas fa-save"/>
+            <button type="submit" class="btn btn-primary fas fa-save" />
 
-            <button type="reset" class="btn btn-primary fas fa-undo"/>
-            
+            <button type="reset" class="btn btn-primary fas fa-undo" />
+
             @if (Mode == ModeEnum.Edit)
             {
-                <button class="btn btn-primary fas fa-trash-alt"/>
+                <button class="btn btn-primary fas fa-trash-alt" />
             }
 
-            <button class="btn btn-primary fas fa-window-close"/>
+            <button class="btn btn-primary fas fa-window-close" />
         </EditForm>
 
     </section>
-    @if(!string.IsNullOrEmpty(Message))
+    @if (!string.IsNullOrEmpty(Message))
     {
         <p class="@StatusClass">@Message</p>
     }
 
-
-    <a href="/products">
-        <i class="fas fa-backward"></i>
-        <span aria-hidden="true"></span> Products
-    </a>
-
+    <button 
+        class="btn btn-primary fas fa-backward" 
+            @onclick="@NavigateToProducts"
+    />
 }
 
 
