@@ -23,6 +23,14 @@ namespace ShList.BlazorSrv
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyHeader().AllowAnyMethod();
+                    builder.WithOrigins("https://localhost:5101", "https://192.168.178.2:5101/");
+                });
+            });
 
             services.AddTransient<IProductService,ProductService>(); //This HAS TO BE BEFORE AddHttpClient
             services.AddHttpClient<IProductService,ProductService>(client => //This HAS TO BE AFTER AddTransient of services using it
@@ -49,10 +57,12 @@ namespace ShList.BlazorSrv
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
+            
+            app.UseCors();
 
             app.UseEndpoints(endpoints =>
             {
