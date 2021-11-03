@@ -55,14 +55,13 @@ namespace ShList.BlazorSrv.Pages
         {
             _product = await _productService.AddOrUpdate(_product);
             Saved = true;
-            Message = "Saved!";
+            Message = "Product Saved";
         }
 
         protected Task HandleInvalidSubmit()
         {
             StatusClass = "alert-danger";
             Message = "Invalid Data";
-            //_product = await _productService.AddOrUpdate(_product);
             return Task.CompletedTask;
         }
 
