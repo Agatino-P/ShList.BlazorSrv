@@ -1,5 +1,5 @@
-﻿@page "/productedit"
-@page "/productedit/{ProductId}"
+﻿@page "/product-edit"
+@page "/product-edit/{ProductId}"
 
 
 <head>
@@ -25,36 +25,48 @@
 @if (_product != null)
 {
 
-    <section class="product-edit">
-        <h1 class="page-title"> Details for @(_product.Name?? "New Product")</h1>
+    <section >
+        <h1 class="page-title">
+            @(_product.Name is null? "New Product": "Edit Product")
+        </h1>
         <EditForm Model="@_product"
-                  OnValidSubmit="@HandleValidSubmit" OnInvalidSubmit="@HandleInvalidSubmit">
-            <DataAnnotationsValidator/>
-            <ValidationSummary/>
-            <label for="itName" class="col-sm-3">Name:</label>
-            <div>
-                <InputText id="itName" class="form-control col-sm-8"
-                           @bind-Value="@_product.Name"
-                           placeholder="Enter product name..." />
-                <ValidationMessage class="offset-3 col-sm-8" For="@(()=>_product.Name)"/>
+                  OnValidSubmit="@HandleValidSubmit"
+                  OnInvalidSubmit="@HandleInvalidSubmit">
+
+            <DataAnnotationsValidator />
+
+            <div class="container mt-5">
+
+                <div class="row">
+                    <label for="itName">Name:</label>
+                </div>
+                <div class="row">
+                    <InputText id="itName" class="form-control"
+                               @bind-Value="@_product.Name"
+                               placeholder="Enter product name..." />
+                    <ValidationMessage For="@(()=>_product.Name)" />
+                </div>
+
+                <div class="row mt-2">
+                    <label for="itNotes">Notes:</label>
+                </div>
+                <div class="row">
+                    <InputText id="itNotes" class="form-control"
+                               @bind-Value="@_product.Notes"
+                               placeholder="Enter product notes...">
+                    </InputText>
+                </div>
+
+                <div class="row justify-content-end mt-3">
+                        <button type="submit" class="btn btn-primary fas fa-save"
+                                data-toggle="tooltip" title="save" />
+
+                        <button class="btn btn-primary fas fa-window-close ml-2"
+                                data-toggle="tooltip" title="Cancel"
+                                @onclick="@OnCancelCmd" />
+                </div>
             </div>
 
-            <label for="itNotes" class="col-sm-3">Name:</label>
-
-            <InputText id="itNotes" class="form-control col-sm-8"
-                       @bind-Value="@_product.Notes"
-                       placeholder="Enter product notes...">
-            </InputText>
-            <button type="submit" class="btn btn-primary fas fa-save" />
-
-            <button type="reset" class="btn btn-primary fas fa-undo" />
-
-            @if (Mode == ModeEnum.Edit)
-            {
-                <button class="btn btn-primary fas fa-trash-alt" />
-            }
-
-            <button class="btn btn-primary fas fa-window-close" />
         </EditForm>
 
     </section>
@@ -63,9 +75,6 @@
         <p class="@StatusClass">@Message</p>
     }
 
-    <button class="btn btn-primary fas fa-backward" 
-            @onclick="@NavigateToProducts"
-    />
-}
+    }
 
 

@@ -5,6 +5,12 @@ VisualStudioVersion = 16.0.31613.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShList.BlazorSrv", "ShList.BlazorSrv\ShList.BlazorSrv.csproj", "{1E723B49-0368-4BEB-9F97-25B6F8BD2F29}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Balsamiq", "Balsamiq", "{AA3F5835-16E1-40F0-BF72-3379F0F0EBB3}"
+	ProjectSection(SolutionItems) = preProject
+		Balsamiq\New Mockup 1.png = Balsamiq\New Mockup 1.png
+		Balsamiq\Product Details.bmpr = Balsamiq\Product Details.bmpr
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

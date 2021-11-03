@@ -46,7 +46,7 @@ namespace ShList.BlazorSrv.Pages
             await base.OnInitializedAsync();
         }
 
-        protected void NavigateToProducts()
+        protected void OnCancelCmd()
         {
             _navigationManager.NavigateTo("/products");
         }
