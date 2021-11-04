@@ -7,8 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShList.BlazorSrv", "ShList.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Balsamiq", "Balsamiq", "{AA3F5835-16E1-40F0-BF72-3379F0F0EBB3}"
 	ProjectSection(SolutionItems) = preProject
-		Balsamiq\New Mockup 1.png = Balsamiq\New Mockup 1.png
-		Balsamiq\Product Details.bmpr = Balsamiq\Product Details.bmpr
+		Balsamiq\List Edit.png = Balsamiq\List Edit.png
+		Balsamiq\List Running.png = Balsamiq\List Running.png
+		Balsamiq\Lists.png = Balsamiq\Lists.png
+		Balsamiq\Product Detail.png = Balsamiq\Product Detail.png
+		Balsamiq\Screen Mockups.bmpr = Balsamiq\Screen Mockups.bmpr
 	EndProjectSection
 EndProject
 Global
