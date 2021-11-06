@@ -9,17 +9,14 @@ namespace ShList.BlazorSrv.Models
 {
     public class Product
     {
-        public Guid Id { get; private set; }
-        
         [Required]
         public string Name { get; set; } = string.Empty;
-        public string Notes { get;set; } = string.Empty;
+        public string Department { get;set; } = string.Empty;
 
         public Product()
         {
-            Id = Guid.NewGuid();
             Name = string.Empty;
-            Notes = string.Empty;
+            Department = string.Empty;
         }
 
         public Product(string name, string notes) : base()
@@ -36,12 +33,12 @@ namespace ShList.BlazorSrv.Models
         public void SetNotes(string notes)
         {
             //add guard clause against null, empty is fine
-            Notes = notes;
+            Department = notes;
         }
 
-        public Product(ProductDto dto) : this(dto.Name, dto.Notes)
+        public Product(ProductDto dto) : this(dto.Name, dto.Department)
         {
-            Id = dto.Id;
+            Department = dto.Department;
         }
 
     }

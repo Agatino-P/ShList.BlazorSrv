@@ -8,7 +8,7 @@ namespace ShList.BlazorSrv.Pages
     public partial class ProductEdit
     {
         [Parameter]
-        public string ProductId { get; set; }
+        public string Name { get; set; }
 
         [Inject]
         private IProductService _productService { get; set; }
@@ -31,7 +31,7 @@ namespace ShList.BlazorSrv.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            if (string.IsNullOrEmpty(ProductId))
+            if (string.IsNullOrEmpty(Name))
             {
                 Mode = ModeEnum.Add;
                 _product = new Product();
@@ -40,7 +40,7 @@ namespace ShList.BlazorSrv.Pages
             else
             {
                 Mode = ModeEnum.Edit;
-                _product = await _productService.Get(ProductId);
+                _product = await _productService.Get(Name);
                 Saved = false;
             }
             await base.OnInitializedAsync();

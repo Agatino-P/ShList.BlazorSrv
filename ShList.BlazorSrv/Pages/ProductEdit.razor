@@ -1,5 +1,5 @@
 ﻿@page "/product-edit"
-@page "/product-edit/{ProductId}"
+@page "/product-edit/{Name}"
 
 
 <head>
@@ -48,12 +48,12 @@
                 </div>
 
                 <div class="row mt-2">
-                    <label for="itNotes">Notes:</label>
+                    <label for="itDepartment">Department:</label>
                 </div>
                 <div class="row">
-                    <InputText id="itNotes" class="form-control"
-                               @bind-Value="@_product.Notes"
-                               placeholder="Enter product notes...">
+                    <InputText id="itDepartment" class="form-control"
+                               @bind-Value="@_product.Department"
+                               placeholder="Enter product Department...">
                     </InputText>
                 </div>
 

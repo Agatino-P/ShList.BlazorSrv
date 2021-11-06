@@ -28,7 +28,7 @@ else
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Notes</th>
+                    <th>Department</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -37,10 +37,10 @@ else
                 {
                     <tr>
                         <td>@product.Name</td>
-                        <td>@product.Notes</td>
+                        <td>@product.Department</td>
                         <td>
 
-                            <a href="@($"product-edit/{product.Id}")" class="btn btn-primary table-btn  iconbutton" 
+                            <a href="@($"product-edit/{product.Name}")" class="btn btn-primary table-btn  iconbutton" 
                                data-toggle="tooltip" title="Edit">
                                 <i class="fas fa-edit" />
                             </a>
