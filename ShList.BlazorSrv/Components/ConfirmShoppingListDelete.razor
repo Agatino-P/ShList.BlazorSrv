@@ -1,0 +1,30 @@
+﻿<style scoped>
+    .iconbutton {
+        width: 48px !important;
+    }
+</style>
+
+
+@if (ShowDialog==true)
+{
+    <div class="modal fade show d-block" tabindex="-1" role="dialog" >
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Confirm Product Delete?</h2>
+                    <button type="button" class="close" @onclick="@OnNo" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Name: @ShoppingList.Name</p>
+                    <p>Created: @ShoppingList.Created</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger fas fa-check" @onclick="@OnYes" />
+                    <button type="button" class="btn btn-secondary fas fa-times" @onclick="@OnNo" data-dismiss="modal"/>
+                </div>
+            </div>
+        </div>
+    </div>
+ }

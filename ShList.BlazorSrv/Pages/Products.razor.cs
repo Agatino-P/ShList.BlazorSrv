@@ -12,7 +12,7 @@ namespace ShList.BlazorSrv.Pages
         private IEnumerable<Product> _products = new List<Product>();
 
         [Inject]
-        private IRestService<Product> _productService { get; set; }
+        private IRestService<Product,string> _productService { get; set; }
 
         protected ConfirmProductDelete ConfirmProductDeleteDialog { get; set; }
 

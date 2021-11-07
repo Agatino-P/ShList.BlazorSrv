@@ -1,5 +1,4 @@
-﻿@page "/"
-@page "/products"
+﻿@page "/shoppinglists"
 
 <style scoped>
     .iconbutton {
@@ -7,7 +6,7 @@
     }
 </style>
 
-@if (_products == null)
+@if (_shoppingList == null)
 {
     <h1>Products</h1>
     <p><em>Loading...</em></p>
@@ -17,7 +16,7 @@ else
 
     <div class="container">
         <h1>
-            <span>Products</span>
+            <span>Shopping Lists</span>
             <button style="" class="btn btn-primary table-btn fas fa-sync  iconbutton"
                     @onclick="@RefreshCmd"/>
         </h1>
@@ -33,20 +32,20 @@ else
                 </tr>
             </thead>
             <tbody>
-                @foreach (var product in _products)
+                @foreach (var shoppingList in _shoppingList)
                 {
                     <tr>
-                        <td>@product.Name</td>
-                        <td>@product.Department</td>
+                        <td>@shoppingList.Name</td>
+                        <td>@shoppingList.Created</td>
                         <td>
 
-                            <a href="@($"product-edit/{product.Name}")" class="btn btn-primary table-btn  iconbutton" 
+                            <a href="@($"shoppinglist-edit/{shoppingList.Id}")" class="btn btn-primary table-btn  iconbutton" 
                                data-toggle="tooltip" title="Edit">
                                 <i class="fas fa-edit" />
                             </a>
                             <button class="btn btn-primary table-btn  iconbutton"
                                data-toggle="tooltip" title="Delete"    
-                                    @onclick="@(_ => ShowDeleteProductCmd(@product))">
+                                    @onclick="@(_ => ShowDeleteShoppingListCmd(shoppingList))">
                                 <i class="fas fa-trash" />
                             </button>
 
@@ -66,4 +65,5 @@ else
     </div>
 }
 
-<ConfirmProductDelete @ref="ConfirmProductDeleteDialog" ConfirmProductDeleteCallBack="@ProductDeleteCallBack"/>
+<ConfirmShoppingListDelete @ref="ConfirmShoppingListDeleteDialog" 
+                      ConfirmShoppingListDeleteCallBack="@ShoppingListDeleteCallBack"/>

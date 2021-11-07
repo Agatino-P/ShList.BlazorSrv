@@ -1,17 +1,19 @@
 ﻿using Microsoft.AspNetCore.Components;
 using ShList.BlazorSrv.Models;
 using ShList.BlazorSrv.Services.Interfaces;
+using System;
 using System.Threading.Tasks;
 
 namespace ShList.BlazorSrv.Pages
 {
-    public partial class ProductEdit : ComponentBase
+    public partial class ShoppingListEdit : ComponentBase
     {
         [Parameter]
-        public string Name { get; set; }
+        public string strId { get; set; }
+        public Guid Id { get; set; }
 
         [Inject]
-        private IRestService<Product, string> _productService { get; set; }
+        private IRestService<ShoppingList, Guid> _slService { get; set; }
 
         [Inject]
         private NavigationManager _navigationManager { get; set; }
@@ -24,24 +26,26 @@ namespace ShList.BlazorSrv.Pages
         protected enum ModeEnum { Edit, Add }
         protected ModeEnum Mode { get; set; }
 
-        private Product _product { get; set; }
+        private ShoppingList _shoppingList { get; set; }
 
         //public string Name { get; set; }
         //public string Notes { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            if (string.IsNullOrEmpty(Name))
+            if (!string.IsNullOrWhiteSpace(strId) && Guid.TryParse(strId, out Guid parsedId))
             {
-                Mode = ModeEnum.Add;
-                _product = new Product();
-                Saved = true;
+                Mode = ModeEnum.Edit;
+
+                Id = parsedId;
+                _shoppingList = await _slService.Get(Id);
+                Saved = false;
             }
             else
             {
-                Mode = ModeEnum.Edit;
-                _product = await _productService.Get(Name);
-                Saved = false;
+                Mode = ModeEnum.Add;
+                _shoppingList = new ShoppingList();
+                Saved = true;
             }
             await base.OnInitializedAsync();
         }
@@ -53,7 +57,7 @@ namespace ShList.BlazorSrv.Pages
 
         protected async Task HandleValidSubmit()
         {
-            _product = await _productService.AddOrUpdate(_product);
+            _shoppingList = await _slService.AddOrUpdate(_shoppingList);
             Saved = true;
             Message = "Product Saved";
         }

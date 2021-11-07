@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace ShList.BlazorSrv.Services.Interfaces
 {
-    public interface IRestService<T>
+    public interface IRestService<T,K>
     {
         Task<IEnumerable<T>> Get();
-        Task<Product> Get(string name);
-        Task<Product> AddOrUpdate(T t);
+        Task<T> Get(K key);
+        Task<T> AddOrUpdate(T t);
         Task<bool> Delete(T t);
     }
 }

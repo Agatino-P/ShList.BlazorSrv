@@ -1,0 +1,80 @@
+﻿@page "/shoppinglist-edit"
+@page "/shoppinglist-edit/{strId}"
+
+
+<head>
+    <style>
+        .alert-success {
+            background-color: green;
+            color: white;
+            border: 2px solid black;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        .alert-danger {
+            background-color: tomato;
+            color: black;
+            border: 2px solid black;
+            margin: 20px;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+@if (_shoppingList!= null)
+{
+
+    <section >
+        <h1 class="page-title">
+            @(_shoppingList.Name is null? "New ShoppingList": "Edit Shopping List")
+        </h1>
+        <EditForm Model="@_shoppingList"
+                  OnValidSubmit="@HandleValidSubmit"
+                  OnInvalidSubmit="@HandleInvalidSubmit">
+
+            <DataAnnotationsValidator />
+
+            <div class="container mt-5">
+
+                <div class="row">
+                    <label for="itName">Name:</label>
+                </div>
+                <div class="row">
+                    <InputText id="itName" class="form-control"
+                               @bind-Value="@_shoppingList.Name"
+                               placeholder="Enter Shopping list name..." />
+                    <ValidationMessage For="@(()=>_shoppingList.Name)" />
+                </div>
+
+                <div class="row mt-2">
+                    <label for="itDepartment">Department:</label>
+                </div>
+                <div class="row">
+                    <InputDate id="itDepartment" class="form-control"
+                               @bind-Value="@_shoppingList.Created"
+                               placeholder="Enter product Department...">
+                    </InputDate>
+                </div>
+
+                <div class="row justify-content-end mt-3">
+                        <button type="submit" class="btn btn-primary fas fa-save"
+                                data-toggle="tooltip" title="save" />
+
+                        <button class="btn btn-primary fas fa-window-close ml-2"
+                                data-toggle="tooltip" title="Cancel"
+                                @onclick="@OnCancelCmd" />
+                </div>
+            </div>
+
+        </EditForm>
+
+    </section>
+    @if (!string.IsNullOrEmpty(Message))
+    {
+        <p class="@StatusClass">@Message</p>
+    }
+
+    }
+
+

@@ -33,17 +33,17 @@ namespace ShList.BlazorSrv
                 });
             });
 
-            services.AddTransient<IRestService<Product>,ProductService>(); //This HAS TO BE BEFORE AddHttpClient
-            services.AddHttpClient<IRestService<Product>, ProductService>(client => //This HAS TO BE AFTER AddTransient of services using it
+            services.AddTransient<IRestService<Product,string>,ProductService>(); //This HAS TO BE BEFORE AddHttpClient
+            services.AddHttpClient<IRestService<Product,string>, ProductService>(client => //This HAS TO BE AFTER AddTransient of services using it
                 {
                     client.BaseAddress = new Uri(Configuration["ApiBaseAddress"]);
                 });
 
-            //services.AddTransient<IRestService<Product>, ProductService>(); //This HAS TO BE BEFORE AddHttpClient
-            //services.AddHttpClient<IRestService<Product>, ProductService>(client => //This HAS TO BE AFTER AddTransient of services using it
-            //{
-            //    client.BaseAddress = new Uri(Configuration["ApiBaseAddress"]);
-            //});
+            services.AddTransient<IRestService<ShoppingList,Guid>, ShoppingListService>(); //This HAS TO BE BEFORE AddHttpClient
+            services.AddHttpClient<IRestService<ShoppingList, Guid>, ShoppingListService>(client => //This HAS TO BE AFTER AddTransient of services using it
+            {
+                client.BaseAddress = new Uri(Configuration["ApiBaseAddress"]);
+            });
 
 
             services.AddRazorPages();

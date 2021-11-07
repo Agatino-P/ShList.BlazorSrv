@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ShList.BlazorSrv.Services.Models
 {
-    public class ProductService : IRestService<Product>
+    public class ProductService : IRestService<Product, string>
     {
         private HttpClient _httpClient { get; set; }
 

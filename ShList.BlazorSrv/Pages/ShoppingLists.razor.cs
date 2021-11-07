@@ -2,48 +2,50 @@
 using ShList.BlazorSrv.Components;
 using ShList.BlazorSrv.Models;
 using ShList.BlazorSrv.Services.Interfaces;
+using System;
 using System.Collections.Generic;
+using System.Security.Permissions;
 using System.Threading.Tasks;
 
 namespace ShList.BlazorSrv.Pages
 {
     public partial class ShoppingLists : ComponentBase
     {
-        private IEnumerable<Product> _products = new List<Product>();
+        private IEnumerable<ShoppingList> _shoppingList = new List<ShoppingList>();
 
         [Inject]
-        private IRestService<Product> _productService { get; set; }
+        private IRestService<ShoppingList, Guid> _slService { get; set; }
 
-        protected ConfirmProductDelete ConfirmProductDeleteDialog { get; set; }
+        protected ConfirmShoppingListDelete ConfirmShoppingListDeleteDialog { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            await getAllProducts();
+            await getAllLists();
             await base.OnInitializedAsync();
         }
 
         protected async Task RefreshCmd()
         {
-            await getAllProducts();
+            await getAllLists();
             StateHasChanged();
         }
 
-        private async Task getAllProducts()
+        private async Task getAllLists()
         {
-            _products = await _productService.Get();
+            _shoppingList = await _slService.Get();
         }
 
-        protected void ShowDeleteProductCmd(Product product)
+        protected void ShowDeleteShoppingListCmd(ShoppingList shoppingList)
         {
-            ConfirmProductDeleteDialog.Product = product;
-            ConfirmProductDeleteDialog.Show(product);
+            ConfirmShoppingListDeleteDialog.ShoppingList = shoppingList;
+            ConfirmShoppingListDeleteDialog.Show(shoppingList);
         }
 
-        public async void ProductDeleteCallBack(Product product)
+        public async void ShoppingListDeleteCallBack(ShoppingList shoppingList)
         {
-            if (product != null)
+            if (shoppingList != null)
             {
-                bool deleted = await _productService.Delete(product);
+                bool deleted = await _slService.Delete(shoppingList);
                 await RefreshCmd();
             }
         }
