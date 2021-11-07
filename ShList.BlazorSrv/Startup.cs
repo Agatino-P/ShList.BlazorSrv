@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ShList.BlazorSrv.Models;
 using ShList.BlazorSrv.Services.Interfaces;
 using ShList.BlazorSrv.Services.Models;
 using System;
@@ -32,11 +33,17 @@ namespace ShList.BlazorSrv
                 });
             });
 
-            services.AddTransient<IProductService,ProductService>(); //This HAS TO BE BEFORE AddHttpClient
-            services.AddHttpClient<IProductService,ProductService>(client => //This HAS TO BE AFTER AddTransient of services using it
+            services.AddTransient<IRestService<Product>,ProductService>(); //This HAS TO BE BEFORE AddHttpClient
+            services.AddHttpClient<IRestService<Product>, ProductService>(client => //This HAS TO BE AFTER AddTransient of services using it
                 {
                     client.BaseAddress = new Uri(Configuration["ApiBaseAddress"]);
                 });
+
+            //services.AddTransient<IRestService<Product>, ProductService>(); //This HAS TO BE BEFORE AddHttpClient
+            //services.AddHttpClient<IRestService<Product>, ProductService>(client => //This HAS TO BE AFTER AddTransient of services using it
+            //{
+            //    client.BaseAddress = new Uri(Configuration["ApiBaseAddress"]);
+            //});
 
 
             services.AddRazorPages();

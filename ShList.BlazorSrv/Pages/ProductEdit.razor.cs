@@ -11,7 +11,7 @@ namespace ShList.BlazorSrv.Pages
         public string Name { get; set; }
 
         [Inject]
-        private IProductService _productService { get; set; }
+        private IRestService<Product> _productService { get; set; }
 
         [Inject]
         private NavigationManager _navigationManager { get; set; }
