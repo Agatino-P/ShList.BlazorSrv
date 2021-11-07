@@ -2,6 +2,7 @@
 using ShList.BlazorSrv.Models;
 using ShList.BlazorSrv.Services.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ShList.BlazorSrv.Pages
@@ -10,10 +11,14 @@ namespace ShList.BlazorSrv.Pages
     {
         [Parameter]
         public string strId { get; set; }
-        public Guid Id { get; set; }
+        
+        private Guid Id { get; set; }
+        private List<Product> _selectableProducts = new List<Product>();
 
         [Inject]
-        private IRestService<ShoppingList, Guid> _slService { get; set; }
+        private IRestService<ShoppingList, Guid> _shoppingListService { get; set; }
+        [Inject] 
+        private IRestService<Product, string> _productService { get; set; }
 
         [Inject]
         private NavigationManager _navigationManager { get; set; }
@@ -38,7 +43,7 @@ namespace ShList.BlazorSrv.Pages
                 Mode = ModeEnum.Edit;
 
                 Id = parsedId;
-                _shoppingList = await _slService.Get(Id);
+                _shoppingList = await _shoppingListService.Get(Id);
                 Saved = false;
             }
             else
@@ -47,7 +52,18 @@ namespace ShList.BlazorSrv.Pages
                 _shoppingList = new ShoppingList();
                 Saved = true;
             }
+
+            IEnumerable<Product> products = await _productService.Get();
+            _selectableProducts = new List<Product>(products);
+
             await base.OnInitializedAsync();
+        }
+
+        public async void ProductListCallback(Product product)
+        {
+            _shoppingList.AddItem(product);
+            _selectableProducts.Remove(product);
+            //Most likely need to arrange something better for reloads, that filters
         }
 
         protected void OnCancelCmd()
@@ -57,7 +73,7 @@ namespace ShList.BlazorSrv.Pages
 
         protected async Task HandleValidSubmit()
         {
-            _shoppingList = await _slService.AddOrUpdate(_shoppingList);
+            _shoppingList = await _shoppingListService.AddOrUpdate(_shoppingList);
             Saved = true;
             Message = "Product Saved";
         }

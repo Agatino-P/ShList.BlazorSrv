@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShList.BlazorSrv.Pages
 {
-    public partial class Products : ComponentBase
+    public partial class ProductList : ComponentBase
     {
         private IEnumerable<Product> _products = new List<Product>();
 

@@ -46,11 +46,27 @@ namespace ShList.BlazorSrv.Models
 
         public ReadOnlyCollection<ShItem> Items => _items.AsReadOnly();
 
+        public void AddItem(Product product)
+        {
+            if (!_items.Exists(i => i.Product == product.Name))
+            {
+                _items.Add(new ShItem(product));
+            }
+        }
+
         public void AddItem(ShItem item)
         {
             if (!_items.Exists(i => i == item))
             {
                 _items.Add(item);
+            }
+        }
+
+        public void RemoveItem(ShItem item)
+        {
+            if (_items.Exists(i => i == item))
+            {
+                _items.Remove(item);
             }
         }
 

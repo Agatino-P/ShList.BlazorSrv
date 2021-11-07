@@ -42,28 +42,60 @@
                 </div>
                 <div class="row">
                     <InputText id="itName" class="form-control"
-                               @bind-Value="@_shoppingList.Name"
-                               placeholder="Enter Shopping list name..." />
+                               @bind-Value="@_shoppingList.Name" placeholder="Enter Shopping list name..." />
                     <ValidationMessage For="@(()=>_shoppingList.Name)" />
                 </div>
 
                 <div class="row mt-2">
-                    <label for="itDepartment">Department:</label>
+                    <label for="itDate">Date:</label>
                 </div>
                 <div class="row">
-                    <InputDate id="itDepartment" class="form-control"
-                               @bind-Value="@_shoppingList.Created"
-                               placeholder="Enter product Department...">
+                    <InputDate id="itDate" class="form-control" @bind-Value="@_shoppingList.Created">
                     </InputDate>
                 </div>
 
-                <div class="row justify-content-end mt-3">
-                        <button type="submit" class="btn btn-primary fas fa-save"
-                                data-toggle="tooltip" title="save" />
+                <div class="container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Qty</th>
+                                <th>Department</th>
+                                <th>Shop</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in _shoppingList.Items.Where(i => i.Status == ShItemStatus.Active))
+                            {
+                                <tr>
+                                    <td>@item.Product</td>
+                                    <td>@item.Quantity</td>
+                                    <td>@item.Department</td>
+                                    <td>@item.Shop</td>
+                                    <td>
+                                        <button class="btn btn-primary table-btn iconbutton"
+                                                data-toggle="tooltip" title="Delete"
+                                                @onclick="@(_ => _shoppingList.RemoveItem(item))">
+                                        <i class=" fas fa-trash" />
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
 
-                        <button class="btn btn-primary fas fa-window-close ml-2"
-                                data-toggle="tooltip" title="Cancel"
-                                @onclick="@OnCancelCmd" />
+                <ProductActionableList SelectableProducts="@_selectableProducts"
+                                        ActionCallback="@ProductListCallback">
+
+                </ProductActionableList>
+
+                <div class="row justify-content-end mt-3">
+                    <button type="submit" class="btn btn-primary fas fa-save" data-toggle="tooltip" title="save" />
+
+                    <button class="btn btn-primary fas fa-window-close ml-2" data-toggle="tooltip" title="Cancel"
+                            @onclick="@OnCancelCmd" />
                 </div>
             </div>
 

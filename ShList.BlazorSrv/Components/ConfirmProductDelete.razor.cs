@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ShList.BlazorSrv.Components
 {
-    public partial class ConfirmProductDelete
+    public partial class ConfirmProductDelete : ComponentBase
     {
         [Parameter]
         public EventCallback<Product> ConfirmProductDeleteCallBack { get; set; }

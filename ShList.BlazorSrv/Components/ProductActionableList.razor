@@ -1,0 +1,46 @@
+﻿<style scoped>
+    .iconbutton {
+        width: 48px !important;
+    }
+    table {
+        outline-style: solid;
+        outline-width: 2px;
+    }
+</style>
+
+
+@if (SelectableProducts == null)
+{
+    <h4>Products</h4>
+    <p><em> Loading...</em></p>
+}
+
+else
+{
+    <div class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in SelectableProducts)
+                {
+                    <tr>
+                        <td> @product.Name </td>
+                        <td> @product.Department </td>
+                        <td>
+                            <button class="btn btn-primary table-btn  iconbutton"
+                                    @onclick="@(_ => ActionButtonCmd(@product))">
+                                <i class="fas fa-bolt" />
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

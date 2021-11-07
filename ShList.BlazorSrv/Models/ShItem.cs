@@ -9,8 +9,10 @@ namespace ShList.BlazorSrv.Models
 {
     public class ShItem
     {
+
         [Required]
         public string Product { get; set; }
+
         public string Department { get; set; }
         public string Shop{ get; set; }
         [Range(0,1000)]
@@ -24,6 +26,12 @@ namespace ShList.BlazorSrv.Models
             Shop = dto.Shop;
             Quantity = dto.Quantity;
             Status = Enum.Parse<ShItemStatus>(dto.Status);
+        }
+
+        public ShItem(Product product)
+        {
+            Product = product.Name;
+            Department = product.Department;
         }
 
         public ShItemDto ToDto()
