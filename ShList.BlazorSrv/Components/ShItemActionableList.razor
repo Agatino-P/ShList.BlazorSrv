@@ -1,0 +1,42 @@
+﻿<style scoped>
+    .iconbutton {
+        width: 48px !important;
+    }
+
+    table {
+        outline-style: solid;
+        outline-width: 2px;
+    }
+</style>
+
+
+@if (ShItems != null)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col">Name</div>
+            <div class="col">Product</div>
+            <div class="col">Quantity</div>
+            <div class="col">Department</div>
+            <div class="col">Shop</div>
+        </div>
+        @foreach (var item in ShItems)
+        {
+            <div class="row">
+                <div class="col">@item.Product</div>
+                <div class="col">@item.Quantity</div>
+                <div class="col">@item.Department</div>
+                <div class="col">@item.Shop</div>
+                <div class="col">
+                    @if(!string.IsNullOrEmpty(ButtonClass))
+                    {
+                    <button class="btn btn-primary table-btn iconbutton"
+                            @onclick="@(_ => ActionButtonCmd(@item))">
+                        <i class=@($"fas {ButtonClass}") />
+                    </button>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+}

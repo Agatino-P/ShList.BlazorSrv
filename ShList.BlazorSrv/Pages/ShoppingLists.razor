@@ -6,7 +6,7 @@
     }
 </style>
 
-@if (_shoppingList == null)
+@if (_shoppingLists == null)
 {
     <h1>Products</h1>
     <p><em>Loading...</em></p>
@@ -15,11 +15,11 @@ else
 {
 
     <div class="container">
-        <h1>
+        <h2>
             <span>Shopping Lists</span>
             <button style="" class="btn btn-primary table-btn fas fa-sync  iconbutton"
                     @onclick="@RefreshCmd"/>
-        </h1>
+        </h2>
     </div>
     <div class="container">
 
@@ -32,7 +32,7 @@ else
                 </tr>
             </thead>
             <tbody>
-                @foreach (var shoppingList in _shoppingList)
+                @foreach (ShList.BlazorSrv.Models.ShoppingList shoppingList in _shoppingLists)
                 {
                     <tr>
                         <td>@shoppingList.Name</td>
@@ -50,6 +50,9 @@ else
                             </button>
 
                         </td>
+                    </tr>
+                    <tr>
+                        <ShItemActionableList ShItems="@(shoppingList.Items.ToList())"></ShItemActionableList>
                     </tr>
                 }
                 <tr>

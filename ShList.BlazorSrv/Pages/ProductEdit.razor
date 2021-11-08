@@ -26,9 +26,9 @@
 {
 
     <section >
-        <h1 class="page-title">
+        <h2 class="page-title">
             @(_product.Name is null? "New Product": "Edit Product")
-        </h1>
+        </h2>
         <EditForm Model="@_product"
                   OnValidSubmit="@HandleValidSubmit"
                   OnInvalidSubmit="@HandleInvalidSubmit">

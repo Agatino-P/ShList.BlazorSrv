@@ -3,6 +3,7 @@ using ShList.BlazorSrv.Models;
 using ShList.BlazorSrv.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ShList.BlazorSrv.Pages
@@ -32,7 +33,7 @@ namespace ShList.BlazorSrv.Pages
         protected ModeEnum Mode { get; set; }
 
         private ShoppingList _shoppingList { get; set; }
-
+        private IEnumerable<Product> _allProducts;
         //public string Name { get; set; }
         //public string Notes { get; set; }
 
@@ -53,22 +54,37 @@ namespace ShList.BlazorSrv.Pages
                 Saved = true;
             }
 
-            IEnumerable<Product> products = await _productService.Get();
-            _selectableProducts = new List<Product>(products);
+            _allProducts = await _productService.Get();
+            updateSelectableProducts();    
 
             await base.OnInitializedAsync();
         }
 
-        public async void ProductListCallback(Product product)
+        private void updateSelectableProducts()
+        {
+            _selectableProducts = new List<Product>(_allProducts)
+                            .Where(pr => !_shoppingList.Items.Any(item => item.Product == pr.Name)).ToList();
+        }
+
+
+        public void RemoveItem(ShItem item)
+        {
+            _shoppingList.RemoveItem(item);
+            updateSelectableProducts();
+        }
+
+
+        public void AddItemCallback(Product product)
         {
             _shoppingList.AddItem(product);
-            _selectableProducts.Remove(product);
+            updateSelectableProducts();
+            StateHasChanged();
             //Most likely need to arrange something better for reloads, that filters
         }
 
         protected void OnCancelCmd()
         {
-            _navigationManager.NavigateTo("/products");
+            _navigationManager.NavigateTo("/shoppinglists");
         }
 
         protected async Task HandleValidSubmit()

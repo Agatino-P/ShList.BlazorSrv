@@ -23,7 +23,7 @@ else
                 <tr>
                     <th>Name</th>
                     <th>Department</th>
-                    <th>Action</th>
+                    <th style="width: 16.66%">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,9 +33,9 @@ else
                         <td> @product.Name </td>
                         <td> @product.Department </td>
                         <td>
-                            <button class="btn btn-primary table-btn  iconbutton"
+                            <button class="btn btn-primary table-btn iconbutton"
                                     @onclick="@(_ => ActionButtonCmd(@product))">
-                                <i class="fas fa-bolt" />
+                                <i class=@($"fas {ButtonClass}") />
                             </button>
                         </td>
                     </tr>

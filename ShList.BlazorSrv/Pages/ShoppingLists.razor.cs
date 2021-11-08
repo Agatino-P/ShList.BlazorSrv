@@ -11,7 +11,7 @@ namespace ShList.BlazorSrv.Pages
 {
     public partial class ShoppingLists : ComponentBase
     {
-        private IEnumerable<ShoppingList> _shoppingList = new List<ShoppingList>();
+        private IEnumerable<ShoppingList> _shoppingLists = new List<ShoppingList>();
 
         [Inject]
         private IRestService<ShoppingList, Guid> _slService { get; set; }
@@ -32,7 +32,7 @@ namespace ShList.BlazorSrv.Pages
 
         private async Task getAllLists()
         {
-            _shoppingList = await _slService.Get();
+            _shoppingLists = await _slService.Get();
         }
 
         protected void ShowDeleteShoppingListCmd(ShoppingList shoppingList)

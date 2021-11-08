@@ -26,9 +26,9 @@
 {
 
     <section >
-        <h1 class="page-title">
+        <h2 class="page-title">
             @(_shoppingList.Name is null? "New ShoppingList": "Edit Shopping List")
-        </h1>
+        </h2>
         <EditForm Model="@_shoppingList"
                   OnValidSubmit="@HandleValidSubmit"
                   OnInvalidSubmit="@HandleInvalidSubmit">
@@ -73,10 +73,10 @@
                                     <td>@item.Quantity</td>
                                     <td>@item.Department</td>
                                     <td>@item.Shop</td>
-                                    <td>
+                                    <td style="width: 16.66%">
                                         <button class="btn btn-primary table-btn iconbutton"
                                                 data-toggle="tooltip" title="Delete"
-                                                @onclick="@(_ => _shoppingList.RemoveItem(item))">
+                                                @onclick="@(()=>RemoveItem(item))">
                                         <i class=" fas fa-trash" />
                                         </button>
                                     </td>
@@ -87,8 +87,8 @@
                 </div>
 
                 <ProductActionableList SelectableProducts="@_selectableProducts"
-                                        ActionCallback="@ProductListCallback">
-
+                                        ActionCallback="@AddItemCallback" 
+                                       ButtonClass="fa-bolt">
                 </ProductActionableList>
 
                 <div class="row justify-content-end mt-3">
