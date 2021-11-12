@@ -21,50 +21,43 @@ else
                     @onclick="@RefreshCmd"/>
         </h2>
     </div>
-    <div class="container">
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Department</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
+    <div class="container">
+        <div class="row">
                 @foreach (ShList.BlazorSrv.Models.ShoppingList shoppingList in _shoppingLists)
                 {
-                    <tr>
-                        <td>@shoppingList.Name</td>
-                        <td>@shoppingList.Created</td>
-                        <td>
-
-                            <a href="@($"shoppinglist-edit/{shoppingList.Id}")" class="btn btn-primary table-btn  iconbutton" 
-                               data-toggle="tooltip" title="Edit">
-                                <i class="fas fa-edit" />
-                            </a>
-                            <button class="btn btn-primary table-btn  iconbutton"
-                               data-toggle="tooltip" title="Delete"    
-                                    @onclick="@(_ => ShowDeleteShoppingListCmd(shoppingList))">
-                                <i class="fas fa-trash" />
-                            </button>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <ShItemActionableList ShItems="@(shoppingList.Items.ToList())"></ShItemActionableList>
-                    </tr>
+                    <div class="container mt-2" style="border: 1px solid #080808">
+                        <div class="row mt-2" >
+                            <div class="col-10 ">
+                                <span><b>@shoppingList.Name</b></span>
+                                <span class="ml-2"><small>@(shoppingList.Created.ToShortDateString())</small></span>
+                                <span ><small>@(shoppingList.Created.ToShortTimeString())</small></span>
+                            </div>
+                            <div class="col-2 ">
+                                <a href="@($"shoppinglist-edit/{shoppingList.Id}")" class="btn btn-primary table-btn  iconbutton" 
+                                    data-toggle="tooltip" title="Edit">
+                                    <i class="fas fa-edit" />
+                                </a>
+                                <button class="btn btn-primary table-btn  iconbutton"
+                                    data-toggle="tooltip" title="Delete"    
+                                        @onclick="@(_ => ShowDeleteShoppingListCmd(shoppingList))">
+                                    <i class="fas fa-trash" />
+                                </button>
+                            </div>  
+                        </div>  
+                        <div class="row">
+                            <div class="col-12 mt-1 mb-1">
+                                <ShItemActionableList ShItems="@(shoppingList.Items.ToList())"></ShItemActionableList>
+                            </div>
+                        </div>
+                    </div>
                 }
-                <tr>
-                    <td />
-                    <td />
-                    <td>
-                        <a href="shoppinglist-edit" class="btn btn-primary table-btn fas fa-plus-square  iconbutton" />
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12" >
+                <a href="shoppinglist-edit" class="btn btn-primary table-btn fas fa-plus  iconbutton float-right" />
+            </div>
+        </div>
     </div>
 }
 

@@ -2,32 +2,29 @@
     .iconbutton {
         width: 48px !important;
     }
-
-    table {
-        outline-style: solid;
-        outline-width: 2px;
-    }
+    
+   
 </style>
 
 
 @if (ShItems != null)
 {
     <div class="container">
-        <div class="row">
-            <div class="col">Name</div>
-            <div class="col">Product</div>
-            <div class="col">Quantity</div>
-            <div class="col">Department</div>
-            <div class="col">Shop</div>
+        <div class="row" stye="margin: 0px">
+            <div class="col-3 "><b>Product</b></div>
+            <div class="col-1"><b>#</b></div>
+            <div class="col-2"><b>Department</b></div>
+            <div class="col-2"><b>Shop</b></div>
+            <div class="col-2"></div>
         </div>
         @foreach (var item in ShItems)
         {
-            <div class="row">
-                <div class="col">@item.Product</div>
-                <div class="col">@item.Quantity</div>
-                <div class="col">@item.Department</div>
-                <div class="col">@item.Shop</div>
-                <div class="col">
+            <div class="row" style="border: 1px dotted #040404;">
+                <div class="col-3">@item.Product</div>
+                <div class="col-1">@item.Quantity</div>
+                <div class="col-2">@item.Department</div>
+                <div class="col-2">@item.Shop</div>
+                <div class="col-2">
                     @if(!string.IsNullOrEmpty(ButtonClass))
                     {
                     <button class="btn btn-primary table-btn iconbutton"
