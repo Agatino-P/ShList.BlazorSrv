@@ -19,13 +19,46 @@
         </div>
         @foreach (var item in ShItems)
         {
+            <EditForm Model="@item"
+                OnValidSubmit="@(_ =>ItemChangedCmd (@item))"
+                OnInvalidSubmit="@HandleInvalidSubmit">
+                  
+                <DataAnnotationsValidator />
+
+                <div class="row" style="border: 1px dotted #040404;">
+                    <div class="col-3">
+                        <InputText class="form-control" @bind-Value="@item.Product" placeholder="Enter Product name..." />
+                    </div>
+                    <div class="col-1">
+                        <InputNumber class="form-control" @bind-Value="@item.Quantity"/>
+                    </div>
+                    <div class="col-2">
+                        <InputText class="form-control" @bind-Value="@item.Department" placeholder="Enter Department name..." />
+                    </div>
+                    <div class="col-2">
+                        <InputText class="form-control" @bind-Value="@item.Shop" placeholder="Enter Shop name..." />
+                    </div>
+                    <div class="col-2">
+
+                         @if(!IsReadOnly)
+                            {
+                            <button class="btn btn-primary table-btn iconbutton"
+                                    @onclick="@(_ => ActionButtonCmd(@item))">
+                                <i class=@($"fas {ButtonClass}") />
+                            </button>
+                            }
+                    </div>
+                </div>  
+
+            </EditForm>
+
             <div class="row" style="border: 1px dotted #040404;">
                 <div class="col-3">@item.Product</div>
                 <div class="col-1">@item.Quantity</div>
                 <div class="col-2">@item.Department</div>
                 <div class="col-2">@item.Shop</div>
                 <div class="col-2">
-                    @if(!string.IsNullOrEmpty(ButtonClass))
+                    @if(!IsReadOnly)
                     {
                     <button class="btn btn-primary table-btn iconbutton"
                             @onclick="@(_ => ActionButtonCmd(@item))">

@@ -9,16 +9,15 @@ namespace ShList.BlazorSrv.Models
 {
     public class ShItem
     {
-
+        public Guid Id { get;  set; }
         [Required]
-        public string Product { get; set; }
+        public string Product { get;  set; }
 
-        public string Department { get; set; }
-        public string Shop{ get; set; }
+        public string Department { get;  set; }
+        public string Shop{ get;  set; }
         [Range(0,1000)]
-        public int Quantity { get; set; }
-        public ShItemStatus Status { get; set; }
-
+        public int Quantity { get;  set; }
+        public ShItemStatus Status { get;  set; }
         public ShItem(ShItemDto dto)
         {
             Product = dto.Product;
@@ -36,7 +35,7 @@ namespace ShList.BlazorSrv.Models
 
         public ShItemDto ToDto()
         {
-            return new ShItemDto(Product, Department, Shop, Quantity, Status.ToString());
+            return new ShItemDto(Id, Product, Department, Shop, Quantity, Status.ToString());
         }
     }
 }

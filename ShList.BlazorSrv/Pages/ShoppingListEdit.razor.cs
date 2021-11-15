@@ -82,6 +82,8 @@ namespace ShList.BlazorSrv.Pages
             //Most likely need to arrange something better for reloads, that filters
         }
 
+        public async Task ItemChangedCallback(ShItem shItem) => await HandleValidSubmit();
+        
         protected void OnCancelCmd()
         {
             _navigationManager.NavigateTo("/shoppinglists");
@@ -91,7 +93,7 @@ namespace ShList.BlazorSrv.Pages
         {
             _shoppingList = await _shoppingListService.AddOrUpdate(_shoppingList);
             Saved = true;
-            Message = "Product Saved";
+            Message = "List Saved";
         }
 
         protected Task HandleInvalidSubmit()

@@ -70,5 +70,17 @@ namespace ShList.BlazorSrv.Models
             }
         }
 
+        //public void UpdateItem(ShItem shItem)
+        //{
+        //    int position = _items.IndexOf(shItem);
+        //    if (position <0 )
+        //    {
+        //        return;
+        //    }
+
+        //    _items
+
+        //}
+
     }
 }
