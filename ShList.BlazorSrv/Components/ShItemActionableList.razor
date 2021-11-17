@@ -27,17 +27,28 @@
 
                 <div class="row" style="border: 1px dotted #040404;">
                     <div class="col-3">
-                        <InputText class="form-control" @bind-Value="@item.Product" placeholder="Enter Product name..." />
+                        <InputText class="form-control" @bind-Value="@item.Product" placeholder="Enter Product name..."  disabled="@IsReadOnly"/>
                     </div>
                     <div class="col-1">
-                        <InputNumber class="form-control" @bind-Value="@item.Quantity"/>
+                        <InputNumber class="form-control" @bind-Value="@item.Quantity"  disabled="@IsReadOnly"/>
                     </div>
                     <div class="col-2">
-                        <InputText class="form-control" @bind-Value="@item.Department" placeholder="Enter Department name..." />
+                        <InputText class="form-control" @bind-Value="@item.Department" placeholder="Enter Department name..."  disabled="@IsReadOnly"/>
                     </div>
                     <div class="col-2">
-                        <InputText class="form-control" @bind-Value="@item.Shop" placeholder="Enter Shop name..." />
+                        <InputText class="form-control" @bind-Value="@item.Shop" placeholder="Enter Shop name..."  disabled="@IsReadOnly"/>
                     </div>
+                    <div class="col-2">
+                        <InputSelect @bind-Value="@item.Status" disabled="@IsReadOnly">
+                            @foreach (var status in Enum.GetValues(typeof(ShItemStatus)))
+                           {
+                               <option value="@status">@status</option>
+                           }
+
+                        </InputSelect>
+                        
+                    </div>
+
                     <div class="col-2">
 
                          @if(!IsReadOnly)
@@ -52,21 +63,7 @@
 
             </EditForm>
 
-            <div class="row" style="border: 1px dotted #040404;">
-                <div class="col-3">@item.Product</div>
-                <div class="col-1">@item.Quantity</div>
-                <div class="col-2">@item.Department</div>
-                <div class="col-2">@item.Shop</div>
-                <div class="col-2">
-                    @if(!IsReadOnly)
-                    {
-                    <button class="btn btn-primary table-btn iconbutton"
-                            @onclick="@(_ => ActionButtonCmd(@item))">
-                        <i class=@($"fas {ButtonClass}") />
-                    </button>
-                    }
-                </div>
-            </div>
+           
         }
     </div>
 }

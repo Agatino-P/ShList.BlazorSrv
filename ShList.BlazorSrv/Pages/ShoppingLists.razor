@@ -1,4 +1,5 @@
-﻿@page "/shoppinglists"
+﻿@page "/"
+@page "/shoppinglists"
 
 <style scoped>
     .iconbutton {
@@ -17,7 +18,7 @@ else
     <div class="container">
         <h2>
             <span>Shopping Lists</span>
-            <button style="" class="btn btn-primary table-btn fas fa-sync  iconbutton"
+            <button style="" class="btn btn-primary fas fa-sync  iconbutton"
                     @onclick="@RefreshCmd"/>
         </h2>
     </div>
@@ -32,22 +33,27 @@ else
                                 <span><b>@shoppingList.Name</b></span>
                                 <span class="ml-2"><small>@(shoppingList.Created.ToShortDateString())</small></span>
                                 <span ><small>@(shoppingList.Created.ToShortTimeString())</small></span>
-                            </div>
-                            <div class="col-2 ">
-                                <a href="@($"shoppinglist-edit/{shoppingList.Id}")" class="btn btn-primary table-btn  iconbutton" 
-                                    data-toggle="tooltip" title="Edit">
-                                    <i class="fas fa-edit" />
-                                </a>
-                                <button class="btn btn-primary table-btn  iconbutton"
+                                <button class="btn btn-danger table-btn iconbutton ml-5"
                                     data-toggle="tooltip" title="Delete"    
                                         @onclick="@(_ => ShowDeleteShoppingListCmd(shoppingList))">
                                     <i class="fas fa-trash" />
                                 </button>
+                            </div>
+                            <div class="col-2">
+                                <a href="@($"shoppinglist-run/{shoppingList.Id}")" class="btn btn-success iconbutton float-lg-right" 
+                                    data-toggle="tooltip" title="Edit">
+                                    <i class="fas fa-play" />
+                                </a>
+                                <a href="@($"shoppinglist-edit/{shoppingList.Id}")" class="btn btn-primary iconbutton float-lg-right mr-3" 
+                                    data-toggle="tooltip" title="Edit">
+                                    <i class="fas fa-edit" />
+                                </a>
+
                             </div>  
                         </div>  
                         <div class="row">
                             <div class="col-12 mt-1 mb-1">
-                                <ShItemActionableList ShItems="@(shoppingList.Items.ToList())"></ShItemActionableList>
+                                <ShItemActionableList ShItems="@(shoppingList.Items.ToList())" IsReadOnly=true></ShItemActionableList>
                             </div>
                         </div>
                     </div>

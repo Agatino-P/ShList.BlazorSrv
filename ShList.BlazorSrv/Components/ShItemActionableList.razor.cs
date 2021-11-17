@@ -18,8 +18,6 @@ namespace ShList.BlazorSrv.Components
         public EventCallback<ShItem> ActionCallback { get; set; }
         public EventCallback<ShItem> ItemChangedCallback { get; set; }
 
-
-
         //Will bind to this
         //Note: the binded value should never be null, so alway initialize it with default values
 

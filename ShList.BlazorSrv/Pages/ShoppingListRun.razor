@@ -1,0 +1,57 @@
+﻿@page "/shoppinglist-run/{strId}"
+
+
+@if (_shoppingList != null)
+{
+
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <h3>@_shoppingList.Name</h3>
+            </div>
+            <div class="col-4">
+                <button class=@($"btn btn-primary active {(_showActive?"btn-lg":"btn-sm")}") data-bs-toggle="button" autocomplete=off  @onclick="@( () => _showActive = !_showActive )">
+                Active
+                </button>
+              
+                 
+                <button class="btn btn-warning" @onclick="@( () => _showOnHold = !_showOnHold )">
+                    @if(_showOnHold) {<strong>OnHold</strong>}
+                    else{<div>OnHold</div>}
+                </button>
+                <button class="btn btn-success" @onclick="@( () => _showDone = !_showDone)">
+                    @if(_showDone) {<strong>Done</strong>}
+                    else{<div>Done</div>}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" hidden="@(!_showActive)">
+        @foreach(var item in _activeItems)
+        {
+        <div class="row">
+            @item.Product
+        </div>
+        }
+            
+    </div>
+        <div class="container" hidden="@(!_showOnHold)">
+        @foreach(var item in _onHoldItems)
+        {
+        <div class="row">
+            @item.Product
+        </div>
+        }
+    </div>
+    <div class="container" hidden="@(!_showDone)">
+        @foreach(var item in _doneItems)
+        {
+        <div class="row">
+            @item.Product
+        </div>
+        }
+    </div>
+
+}
+

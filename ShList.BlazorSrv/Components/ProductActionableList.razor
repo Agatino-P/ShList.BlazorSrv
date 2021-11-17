@@ -18,29 +18,24 @@
 else
 {
     <div class="container">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Department</th>
-                    <th style="width: 16.66%">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var product in SelectableProducts)
-                {
-                    <tr>
-                        <td> @product.Name </td>
-                        <td> @product.Department </td>
-                        <td>
-                            <button class="btn btn-primary table-btn iconbutton"
-                                    @onclick="@(_ => ActionButtonCmd(@product))">
-                                <i class=@($"fas {ButtonClass}") />
-                            </button>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="col-6"> <strong>Name</strong> </div>
+            <div class="col-5"> <strong>Department</strong></div>
+            <div class="col-1"> <strong>Action</strong></div>
+        </div>
+
+        @foreach (var product in SelectableProducts)
+        {
+            <div class="row" style="border: 1px dotted #040404;">
+                <div class="col-6"> @product.Name </div>
+                <div class="col-5"> @product.Department </div>
+                <div class="col-1"> 
+                        <button class="btn btn-primary table-btn iconbutton"
+                                @onclick="@(_ => ActionButtonCmd(@product))">
+                            <i class=@($"fas {ButtonClass}") />
+                        </button>
+                    </div>
+            </div>
+        }
     </div>
 }

@@ -35,63 +35,36 @@
 
             <DataAnnotationsValidator />
 
-            <div class="container mt-5">
+            <div class="container">
 
-                <div class="row">
-                    <label for="itName">Name:</label>
-                </div>
-                <div class="row">
-                    <InputText id="itName" class="form-control"
-                               @bind-Value="@_shoppingList.Name" placeholder="Enter Shopping list name..." />
-                    <ValidationMessage For="@(()=>_shoppingList.Name)" />
-                </div>
-
-                <div class="row mt-2">
-                    <label for="itDate">Date:</label>
-                </div>
-                <div class="row">
-                    <InputDate id="itDate" class="form-control" @bind-Value="@_shoppingList.Created">
-                    </InputDate>
-                </div>
-
-                <div class="container">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Product</th>
-                                <th>Qty</th>
-                                <th>Department</th>
-                                <th>Shop</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in _shoppingList.Items.Where(i => i.Status == ShItemStatus.Active))
-                            {
-                                <tr>
-                                    <td>@item.Product</td>
-                                    <td>@item.Quantity</td>
-                                    <td>@item.Department</td>
-                                    <td>@item.Shop</td>
-                                    <td style="width: 16.66%">
-                                        <button class="btn btn-primary table-btn iconbutton"
-                                                data-toggle="tooltip" title="Delete"
-                                                @onclick="@(()=>RemoveItem(item))">
-                                        <i class=" fas fa-trash" />
-                                        </button>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+                <div class="row mb-5">
+                    <div class="col-1">
+                        <label for="itName">Name:</label>
+                    </div>
+                    <div class="col-8">
+                        <InputText id="itName" class="form-control"
+                                    @bind-Value="@_shoppingList.Name" placeholder="Enter Shopping list name..." />
+                        <ValidationMessage For="@(()=>_shoppingList.Name)" />
+                    </div>
+                    <div class="col-1 float-right">
+                        <label for="itDate">Date:</label>
+                    </div>
+                    <div class="col-2">
+                        <InputDate id="itDate" class="form-control" @bind-Value="@_shoppingList.Created"></InputDate>
+                    </div>
                 </div>
 
-                <ProductActionableList SelectableProducts="@_selectableProducts"
-                                        ActionCallback="@AddItemCallback" 
-                                       ButtonClass="fa-bolt">
-                </ProductActionableList>
+                <div class="mt-5">
+                    <ShItemActionableList ActionCallback="@((item)=>RemoveItem(item))" ButtonClass="fa-trash" ShItems="@(_shoppingList.Items.ToList())"/>
+                </div>
 
-                <div class="row justify-content-end mt-3">
+                <div class="mt-2">
+                    <ProductActionableList SelectableProducts="@_selectableProducts"
+                                            ActionCallback="@AddItemCallback" 
+                                           ButtonClass="fa-bolt"/>
+                </div>
+
+                <div class="row justify-content-end mt-5">
                     <button type="submit" class="btn btn-primary fas fa-save" data-toggle="tooltip" title="save" />
 
                     <button class="btn btn-primary fas fa-window-close ml-2" data-toggle="tooltip" title="Cancel"
