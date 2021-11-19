@@ -70,6 +70,14 @@ namespace ShList.BlazorSrv.Models
             }
         }
 
+        internal void SetItemStatus(ShItem item, ShItemStatus status)
+        {
+            if (_items.Exists(i => i == item))
+            {
+                item.Status=status;
+            }
+        }
+
         //public void UpdateItem(ShItem shItem)
         //{
         //    int position = _items.IndexOf(shItem);

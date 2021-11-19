@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using ShList.Dto;
 
 namespace ShList.BlazorSrv.Pages
 {
@@ -22,7 +23,7 @@ namespace ShList.BlazorSrv.Pages
         private IEnumerable<ShItem> _doneItems => _shoppingList.Items.Where(ShItem => ShItem.Status == Dto.ShItemStatus.Done);
 
         [Inject]
-        private IRestService<ShoppingList, Guid> _shoppingListService { get; set; }
+        private IShoppingListService _shoppingListService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -33,6 +34,12 @@ namespace ShList.BlazorSrv.Pages
 
 
             await base.OnInitializedAsync();
+        }
+
+        private async Task setItemStatus(ShItem Item, ShItemStatus status)
+        {
+            Item.Status = status;
+            await _shoppingListService.SetItemStatus(_shoppingList, Item, status);
         }
 
 

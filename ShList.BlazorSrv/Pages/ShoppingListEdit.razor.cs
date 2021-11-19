@@ -17,7 +17,7 @@ namespace ShList.BlazorSrv.Pages
         private List<Product> _selectableProducts = new List<Product>();
 
         [Inject]
-        private IRestService<ShoppingList, Guid> _shoppingListService { get; set; }
+        private IShoppingListService _shoppingListService { get; set; }
         [Inject] 
         private IRestService<Product, string> _productService { get; set; }
 

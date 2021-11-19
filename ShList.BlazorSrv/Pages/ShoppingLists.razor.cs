@@ -14,7 +14,7 @@ namespace ShList.BlazorSrv.Pages
         private IEnumerable<ShoppingList> _shoppingLists = new List<ShoppingList>();
 
         [Inject]
-        private IRestService<ShoppingList, Guid> _slService { get; set; }
+        private IShoppingListService _slService { get; set; }
 
         protected ConfirmShoppingListDelete ConfirmShoppingListDeleteDialog { get; set; }
 

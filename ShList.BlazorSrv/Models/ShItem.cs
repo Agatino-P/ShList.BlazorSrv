@@ -20,6 +20,7 @@ namespace ShList.BlazorSrv.Models
         public ShItemStatus Status { get;  set; }
         public ShItem(ShItemDto dto)
         {
+            Id= dto.Id; 
             Product = dto.Product;
             Department = dto.Department;
             Shop = dto.Shop;

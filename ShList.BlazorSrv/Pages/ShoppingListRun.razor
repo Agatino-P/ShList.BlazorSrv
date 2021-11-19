@@ -13,43 +13,73 @@
                 <button class=@($"btn btn-primary active {(_showActive?"btn-lg":"btn-sm")}") data-bs-toggle="button" autocomplete=off  @onclick="@( () => _showActive = !_showActive )">
                 Active
                 </button>
-              
-                 
-                <button class="btn btn-warning" @onclick="@( () => _showOnHold = !_showOnHold )">
-                    @if(_showOnHold) {<strong>OnHold</strong>}
-                    else{<div>OnHold</div>}
+                <button class=@($"btn btn-warning active {(_showOnHold?"btn-lg":"btn-sm")}") @onclick="@( () => _showOnHold = !_showOnHold )">
+                    OnHold
                 </button>
-                <button class="btn btn-success" @onclick="@( () => _showDone = !_showDone)">
-                    @if(_showDone) {<strong>Done</strong>}
-                    else{<div>Done</div>}
+                <button class=@($"btn btn-success active {(_showDone?"btn-lg":"btn-sm")}") @onclick="@( () => _showDone = !_showDone)">
+                    Done
                 </button>
             </div>
         </div>
     </div>
 
-    <div class="container" hidden="@(!_showActive)">
-        @foreach(var item in _activeItems)
+    <div class="container bg-primary mt-3 p-3" hidden="@(!_showActive)">
+        @foreach(var activeItem in _activeItems)
         {
-        <div class="row">
-            @item.Product
+            <div class="row mt-2" >
+            <div class="col-8">@activeItem.Product</div>
+            <div class="col-2">@activeItem.Quantity</div>
+            <div class="col-1">
+                <button class="btn btn-warning" @onclick="@( _ => setItemStatus(activeItem,ShItemStatus.OnHold))">
+                     <i class="fas fa-pause"></i>
+                </button>
+            </div>
+            <div class="col-1">
+                <button class="btn btn-success" @onclick="@( _ => setItemStatus(activeItem,ShItemStatus.Done))">
+                     <i class="fas fa-check"></i>
+                </button>
+            </div>
         </div>
         }
-            
     </div>
-        <div class="container" hidden="@(!_showOnHold)">
-        @foreach(var item in _onHoldItems)
+    
+    <div class="container bg-warning mt-3 p-3" hidden="@(!_showOnHold)">
+        @foreach(var onHoldIitem in _onHoldItems)
         {
-        <div class="row">
-            @item.Product
-        </div>
+            <div class="row mt-2" >
+                <div class="col-8">@onHoldIitem.Product</div>
+                <div class="col-2">@onHoldIitem.Quantity</div>
+                <div class="col-1">
+                    <button class="btn btn-primary" @onclick="@( () => setItemStatus(onHoldIitem,ShItemStatus.Active) )">
+                         <i class="fas fa-play"></i>
+                    </button>
+                </div>
+                <div class="col-1">
+                    <button class="btn btn-success" @onclick="@( () => setItemStatus(onHoldIitem,ShItemStatus.Done) )">
+                         <i class="fas fa-check"></i>
+                    </button>
+                </div>
+            </div>
         }
     </div>
-    <div class="container" hidden="@(!_showDone)">
-        @foreach(var item in _doneItems)
+
+    <div class="container bg-success mt-3 p-3" hidden="@(!_showDone)">
+        @foreach(var doneItem in _doneItems)
         {
-        <div class="row">
-            @item.Product
-        </div>
+            <div class="row mt-3" >
+                <div class="col-8">@doneItem.Product</div>
+                <div class="col-2">@doneItem.Quantity</div>
+                <div class="col-1">
+                    <button class="btn btn-primary" @onclick="@( () => setItemStatus(doneItem,ShItemStatus.Active) )">
+                         <i class="fas fa-play"></i>
+                    </button>
+                    </div>
+                        <div class="col-1">
+                        <button class="btn btn-warning" @onclick="@( () => setItemStatus(doneItem,ShItemStatus.OnHold) )">
+                         <i class="fas fa-pause"></i>
+                    </button>
+                </div>
+            </div>
         }
     </div>
 

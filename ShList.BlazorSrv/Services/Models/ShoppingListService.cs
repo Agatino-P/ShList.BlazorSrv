@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace ShList.BlazorSrv.Services.Models
 {
-    public class ShoppingListService : IRestService<ShoppingList, Guid>
+    public class ShoppingListService : IShoppingListService
     {
         private HttpClient _httpClient { get; set; }
 
@@ -51,7 +51,10 @@ namespace ShList.BlazorSrv.Services.Models
             return outcome.IsSuccessStatusCode == true; //Quick and dirty because I know ShoppingList is not changed, but the right way is to deserialize the outcome of a successful post
         }
 
-
-
+        public async Task SetItemStatus(ShoppingList shoppingList, ShItem item, ShItemStatus status)
+        {
+            shoppingList.SetItemStatus(item, status);
+            HttpResponseMessage outcome = await _httpClient.PutAsync($"/api/ShoppingLists/{shoppingList.Id}/{item.Id}/status/{status}",null);
+        }
     }
 }

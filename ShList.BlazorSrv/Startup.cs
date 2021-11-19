@@ -39,8 +39,8 @@ namespace ShList.BlazorSrv
                     client.BaseAddress = new Uri(Configuration["ApiBaseAddress"]);
                 });
 
-            services.AddTransient<IRestService<ShoppingList,Guid>, ShoppingListService>(); //This HAS TO BE BEFORE AddHttpClient
-            services.AddHttpClient<IRestService<ShoppingList, Guid>, ShoppingListService>(client => //This HAS TO BE AFTER AddTransient of services using it
+            services.AddTransient<IShoppingListService , ShoppingListService>(); //This HAS TO BE BEFORE AddHttpClient
+            services.AddHttpClient<IShoppingListService, ShoppingListService>(client => //This HAS TO BE AFTER AddTransient of services using it
             {
                 client.BaseAddress = new Uri(Configuration["ApiBaseAddress"]);
             });
